@@ -65,31 +65,30 @@ users = api.lookup_users(user_id=followers[0:90])
 filtered_users = list(filter(lambda x: x.followers_count/x.friends_count < 1,users))
 print("length of filtered_users " + str(len(filtered_users)))
 # 1.4 store the ids in the prospects table
+
+# create query values 'user_records' from filtered users 
 user_records = [(time.time(), user.id) for user in filtered_users]
 
+# execute insertion with user_records and commit changes
 cur.executemany('''INSERT INTO prospects VALUES (?, ?);''', user_records)
 print("Rows inserted into prospects " + str(cur.rowcount))
 con.commit()
 # 2 retrieve and remove ids from the prospects table
 prospects = cur.execute('''SELECT * FROM prospects;''')
-# print("row count " + str(len(prospects.fetchall())))
-# for row in prospects:
-#     print(row)
 # 3 follow these ids(prospects)
 
-# 4 put them into following table
+# 4 put prospects into the following table
+# create query parameters from prospects, which is a db cursor
 prospect_records = [(time.time(), row[1]) for row in prospects]
-for row in prospect_records:
-    print(row[1])
+# insert values into following table and commit changes
 cur.executemany('''INSERT INTO following VALUES (?, ?);''', prospect_records)
 con.commit()
-friends = cur.execute('''SELECT * FROM following;''')
-for friend in friends:
-    print(friend)
 
-# filter out following table for ids that have been followed for longer than a day. 
+# 5 filter out following table for ids that have been followed for longer than a day. 
+friends = cur.execute('''SELECT * FROM following;''')
+friends_records = [(row[0], row[1]) for row in friends]
 # prospect_ids = cur.execute("DELETE FROM prospects WHERE id=?", ([row[1] for row in prospects]))
-print(list(row[1] for row in prospects.fetchall()))
+expired_friends_records = list(filter(lambda x: x[0],friends_records))
 # Put them in unfollowed table
 
 # Store prospects in the following table
