@@ -24,7 +24,7 @@ except:
     print("Error during authentication")
 
 # connect to DB
-con = sqlite3.connect('prospects.db')
+con = sqlite3.connect('./prospects.db')
 cur = con.cursor()
 
 # check if prospects table exists, create it if it doesn't
@@ -40,10 +40,10 @@ if cur.fetchone()[0] == 0:
                     (date text, id integer)''')
 
 # check if unfollowed table exists, create it if it doesn't
-cur.execute(''' SELECT count(name)  FROM sqlite_master WHERE type='table' AND name='unfollowed' ''')
-if cur.fetchone()[0] == 0:
-    cur.execute('''CREATE TABLE unfollowed
-                    (date text, id integer)''')
+# cur.execute(''' SELECT count(name)  FROM sqlite_master WHERE type='table' AND name='unfollowed' ''')
+# if cur.fetchone()[0] == 0:
+#     cur.execute('''CREATE TABLE unfollowed
+#                     (date text, id integer)''')
 
 
 ######## Start of program
@@ -63,29 +63,33 @@ users = api.lookup_users(user_id=followers[0:90])
 
 # 1.3 filter ids based on follower/friends ratio. 
 filtered_users = list(filter(lambda x: x.followers_count/x.friends_count < 1,users))
-print(len(filtered_users))
+print("length of filtered_users " + str(len(filtered_users)))
 # 1.4 store the ids in the prospects table
-for user in filtered_users:
-    cur.execute("INSERT INTO prospects VALUES (?, ?)", (time.time() ,user.id))
+user_records = [(time.time(), user.id) for user in filtered_users]
+
+cur.executemany('''INSERT INTO prospects VALUES (?, ?);''', user_records)
+print("Rows inserted into prospects " + str(cur.rowcount))
 con.commit()
 # 2 retrieve and remove ids from the prospects table
-prospects = cur.execute("SELECT * FROM prospects")
+prospects = cur.execute('''SELECT * FROM prospects;''')
+# print("row count " + str(len(prospects.fetchall())))
 # for row in prospects:
 #     print(row)
 # 3 follow these ids(prospects)
 
 # 4 put them into following table
-for row in prospects:
+prospect_records = [(time.time(), row[1]) for row in prospects]
+for row in prospect_records:
     print(row[1])
-    cur.execute("INSERT INTO following VALUES (?, ?)", (time.time(), row[1]))
+cur.executemany('''INSERT INTO following VALUES (?, ?);''', prospect_records)
 con.commit()
-friends = cur.execute("SELECT * FROM following")
+friends = cur.execute('''SELECT * FROM following;''')
 for friend in friends:
     print(friend)
 
 # filter out following table for ids that have been followed for longer than a day. 
 # prospect_ids = cur.execute("DELETE FROM prospects WHERE id=?", ([row[1] for row in prospects]))
-print(list(row[1] for row in prospects))
+print(list(row[1] for row in prospects.fetchall()))
 # Put them in unfollowed table
 
 # Store prospects in the following table
