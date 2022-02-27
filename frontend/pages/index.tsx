@@ -12,14 +12,16 @@ const Home: NextPage = () => {
 
     <nav className="w-full border-b-2 pb-1">
       <div className="mx-auto text-center">
-        <button className="px-2 mx-1 bg-gray-300/50 rounded-md font-semibold text-black/90 ">
-          Explore
-        </button>
         <button className="px-2 mx-1 rounded-md font-semibold text-black/40 ">
-          Search
+          Explore
         </button> 
+        <button className="px-2 mx-1 bg-gray-300/50 rounded-md font-semibold text-black/90 ">
+          Search
+        </button>
         <button className="px-2 mx-1 rounded-md font-semibold text-black/40">
-          Campaign
+          <a href="/campaign">
+            Campaigns
+          </a>
         </button> 
         <button className="px-2 mx-1 rounded-md font-semibold text-black/40 ">
           Profile
@@ -132,7 +134,12 @@ const Home: NextPage = () => {
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
                     </svg>
 
-                    <p className="font-bold ">Account Added to Default Campaign!</p>
+                    <p className="font-bold ">
+                      Account Added to Default Campaign!
+                      <a href="/" className="ml-2 underline">
+                        View
+                      </a>
+                    </p>
                 </div>
             </div>
           </div>
