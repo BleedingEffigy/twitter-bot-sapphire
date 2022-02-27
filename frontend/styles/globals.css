@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#Card {
+    text-shadow: 0 1px 1px rgb(20 23 26 / 80%);
+  }
+  

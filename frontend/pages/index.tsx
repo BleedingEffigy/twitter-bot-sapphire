@@ -10,6 +10,22 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+    <nav className="w-full border-b-2 pb-1">
+      <div className="mx-auto text-center">
+        <button className="px-2 mx-1 bg-gray-300/50 rounded-md font-semibold text-black/90 ">
+          Explore
+        </button>
+        <button className="px-2 mx-1 rounded-md font-semibold text-black/40 ">
+          Search
+        </button> 
+        <button className="px-2 mx-1 rounded-md font-semibold text-black/40">
+          Campaign
+        </button> 
+        <button className="px-2 mx-1 rounded-md font-semibold text-black/40 ">
+          Profile
+        </button> 
+      </div>      
+    </nav>
 
       {/* <!-- Card Section --> */}
       <section className="text-white/90 bg-gray-50 body-font w-full relative justify-center overflow-hidden sm:py-12">
