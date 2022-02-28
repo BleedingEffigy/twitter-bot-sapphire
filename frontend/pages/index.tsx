@@ -40,11 +40,11 @@ const Home: NextPage = () => {
             </div>
             {/* Card */}
             <div className="p-4 md:-m-1 w-full">
-              <div className="relative h-full overflow-hidden bg-white shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:rounded-lg md:w-10/12">
+              <div className="relative h-full overflow-hidden bg-white shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:rounded-lg md:w-10/12 lg:w-8/12 xl:w-1/2">
                {/* Top-half Profile Card */}
                 <div className="relative">
                   {/* <!-- Background image --> */}
-                  <img className="lg:h-48 md:h-[40vh] w-full object-cover object-center" src="https://pbs.twimg.com/profile_banners/1031293757759610880/1585926693/web" alt="blog" />
+                  <img className="lg:h-[40vh] md:h-[40vh] w-full object-cover object-center" src="https://pbs.twimg.com/profile_banners/1031293757759610880/1585926693/web" alt="blog" />
                   {/* <!-- Card Substance --> */}
                   <div className="absolute inset-0 flex justify-center items-center m-auto text-center">
                     <div className="" id="Card">
