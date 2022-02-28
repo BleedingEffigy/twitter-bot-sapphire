@@ -12,18 +12,18 @@ const Home: NextPage = () => {
 
     <nav className="w-full border-b-2 pb-1">
       <div className="mx-auto text-center">
-        <button className="px-2 mx-1 rounded-md font-semibold text-black/40 ">
+        <button className="px-2 mx-1 rounded-md font-semibold text-black/40 hover:cursor-not-allowed">
           Explore
         </button> 
         <button className="px-2 mx-1 bg-gray-300/50 rounded-md font-semibold text-black/90 ">
           Search
         </button>
-        <button className="px-2 mx-1 rounded-md font-semibold text-black/40">
-          <a href="/campaign">
-            Campaigns
-          </a>
-        </button> 
-        <button className="px-2 mx-1 rounded-md font-semibold text-black/40 ">
+        <a href="/campaign">
+          <button className="px-2 mx-1 rounded-md font-semibold text-black/40">
+              Campaigns
+          </button> 
+        </a>
+        <button className="px-2 mx-1 rounded-md font-semibold text-black/40 hover:cursor-not-allowed">
           Profile
         </button> 
       </div>      
@@ -136,7 +136,7 @@ const Home: NextPage = () => {
 
                     <p className="font-bold ">
                       Account Added to Default Campaign!
-                      <a href="/" className="ml-2 underline">
+                      <a href="/campaign" className="ml-2 underline">
                         View
                       </a>
                     </p>
