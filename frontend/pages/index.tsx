@@ -130,22 +130,37 @@ const Home = ({providers}: IHome ) => {
             {/* Card */}
             {statuses && (
               <>
-                { statuses.map(({ id, description, name, screen_name }) => {
+                { statuses.map((
+                  { 
+                    id, 
+                    description, 
+                    name, 
+                    screen_name, 
+                    location, 
+                    url, 
+                    created_at,
+                    statuses_count,
+                    followers_count,
+                    friends_count,
+                    listed_count,
+                    profile_banner_url,
+                    profile_image_url_https
+                }) => {
                   return (
-                    <div className="p-4 md:-m-1 w-full">
+                    <div className="p-4 md:-m-1 w-full" key={id}>
                       <div className="relative h-full overflow-hidden bg-white shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:rounded-lg md:w-10/12 lg:w-8/12 xl:w-1/2">
                       {/* Top-half Profile Card */}
                         <div className="relative">
                           {/* <!-- Background image --> */}
-                          <img className="lg:h-[40vh] md:h-[40vh] w-full object-cover object-center" src="https://pbs.twimg.com/profile_banners/1031293757759610880/1585926693/web" alt="blog" />
+                          <img className="lg:h-[40vh] md:h-[40vh] w-full object-cover object-center" src={String(profile_banner_url)} alt="blog" />
                           {/* <!-- Card Substance --> */}
                           <div className="absolute inset-0 flex justify-center items-center m-auto text-center">
                             <div className="" id="Card">
-                              <img className="mx-auto mt-2 rounded-full ring-2 ring-white" src="https://pbs.twimg.com/profile_images/1246094561698615298/ML6dCmxV_bigger.jpg" />
-                              <h2 className="text-2xl font-bold pb-2">Jermaine Jupiter | The Jobfather</h2>
-                              <h3 className="text-xl">@JermaineJupiter</h3>
-                              <h4 className="text-base">Technical Recruiter @Wealthsimple | Rootin' For Everybody Black | Opinions are my own. Book a consultation for your career with me: calendly.com/jupiterhr.</h4>
-                              <h4 className="mb-2">Toronto, Ontario · JupiterHR.ca</h4>
+                              <img className="mx-auto mt-2 rounded-full ring-2 ring-white" src={String(profile_image_url_https)} />
+                              <h2 className="text-2xl font-bold pb-2">{name}</h2>
+                              <h3 className="text-xl">@{screen_name}</h3>
+                              <h4 className="text-base">{description}</h4>
+                              <h4 className="mb-2">{location} · {url}</h4>
                               <span className=""> Joined Aug 2018 </span>
                             </div>
                           </div>
@@ -156,22 +171,22 @@ const Home = ({providers}: IHome ) => {
                             <span className="text-sm text-gray-500/90 px-3">
                               Tweets
                               <br />
-                              <span className="text-base font-extrabold text-gray-800/90"> 44,000 </span>
+                              <span className="text-base font-extrabold text-gray-800/90"> {statuses_count} </span>
                             </span>
                             <span className="text-sm text-gray-500/90 px-3">
                               Following
                               <br />
-                              <span className="text-base font-extrabold text-gray-800/90"> 4,024 </span>
+                              <span className="text-base font-extrabold text-gray-800/90"> {friends_count} </span>
                             </span>
                             <span className="text-sm text-gray-500/90 px-3">
                               Followers
                               <br />
-                              <span className="text-base font-extrabold text-gray-800/90"> 31,040 </span>
+                              <span className="text-base font-extrabold text-gray-800/90"> {followers_count} </span>
                             </span>
                             <span className="text-sm text-gray-500/90 px-3">
                               Listed
                               <br />
-                              <span className="text-base font-extrabold text-gray-800/90"> 1,320 </span>
+                              <span className="text-base font-extrabold text-gray-800/90"> {listed_count} </span>
                             </span>
                             <button className="ml-auto inline-flex bg-sky-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-blue-600 mr-2">
                               <svg className="w-4 h-4 my-auto mr-1" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
