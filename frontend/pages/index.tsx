@@ -34,8 +34,13 @@ const Home = ({providers}: IHome ) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-    <nav className="w-full border-b-2 pb-1">
-      <div className="mx-auto text-center">
+    <nav className="w-full border-b-2 pb-1 flex flex-row">
+      
+      <div className="justify-start">
+      
+      </div>
+
+      <div className="justify-center w-full text-center">
         <button className="px-2 mx-1 rounded-md font-semibold text-black/40 hover:cursor-not-allowed">
           Explore
         </button> 
@@ -49,27 +54,33 @@ const Home = ({providers}: IHome ) => {
         </a>
         <button className="px-2 mx-1 rounded-md font-semibold text-black/40 hover:cursor-not-allowed">
           Profile
-        </button> 
-      </div>      
-    </nav>
-    
-    {
-      ( session && session.data)
-      ?
-      <>
-        <h1>Welcome to dashboard, {session.data?.user?.name}</h1>
-        <button onClick={() => signOut()}>Logout</button>
-      </>
-      :
-      <>
-      <h1>3-legged Twitter Oauth using next-auth</h1>
-      {Object.values(providers).map((provider) => (
-        <button key={provider.name} onClick={() => signIn(provider.id)}>
-          Login with {provider.name}
         </button>
-        ))}
-      </>
-    }
+      </div> 
+
+      <div className="justify-end">
+      {
+            // TODO simplify this boolean
+            ( session && session.data && session.data.user && session.data.user.image)
+              ?
+              <>
+                <div className="flex flex-row">
+                  <img className="w-10 h-10 rounded-full" src={session?.data?.user?.image}/>
+                  <button className="bg-red-400 p-1 rounded-lg" 
+                    onClick={() => signOut()}>Logout</button>
+                </div>
+              </>
+              :
+              <>
+                {Object.values(providers).map((provider) => (
+                  <button className="justify-end" key={provider.name} onClick={() => signIn(provider.id)}>
+                    Login 👥
+                  </button>
+                  ))}
+              </>
+          }
+      </div>
+
+    </nav>
 
       {/* <!-- Card Section --> */}
       <section className="text-white/90 bg-gray-50 body-font w-full relative justify-center overflow-hidden sm:py-12">
